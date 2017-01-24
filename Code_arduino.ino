@@ -2,6 +2,8 @@
 Watchdog
 
 */
+
+#define D_COUNTER 50
 const int outVenus=2;
 const int outSaturne=3;
 const int inVenus=4;
@@ -44,46 +46,50 @@ void loop() {
  switch (idLeader) {   
     case 0: // Aucun leader, "initialisation"
         delay(1);
-        if (digitalRead(inVenus)==LOW) {
+        if (digitalRead(inVenus)==HIGH) {
             idLeader=1;
-            digitalWrite(outSaturne,LOW);
+            digitalWrite(outSaturne,HIGH);
+            digitalWrite(outVenus,LOW);
             digitalWrite(greenLEDVenus, LOW);
             digitalWrite(redLEDVenus, HIGH);
             
-        } else if (digitalRead(inSaturne)==LOW) {
+        } else if (digitalRead(inSaturne)==HIGH) {
             idLeader=2;
-            digitalWrite(outVenus,LOW);
+            digitalWrite(outVenus,HIGH);
+            digitalWrite(outSaturne,LOW);
             digitalWrite(greenLEDSaturne, LOW);
             digitalWrite(redLEDSaturne, HIGH);
         }
     break; 
     case 1:
-        while ((counter<30) || (digitalRead(inVenus)==HIGH)) {
+        while ((counter<D_COUNTER) && (digitalRead(inVenus)==LOW)) {
             delay(1); // attente 1ms
             counter=counter+1;
         }
-        if (counter==30) { // leader mort
+        if (counter==D_COUNTER) { // leader mort
             digitalWrite(greenLEDVenus, HIGH);
             digitalWrite(redLEDVenus, LOW);
-            digitalWrite(outSaturne,HIGH);
+            digitalWrite(outSaturne,LOW);
+            digitalWrite(outVenus,HIGH);
             idLeader=0;
         } else { // leader vivant
-            //digitalWrite(outSaturne,LOW);
+            //digitalWrite(outSaturne,HIGH);
             digitalWrite(greenLEDVenus, LOW);
         } 
     break;
     case 2:
-        while ((counter<30) || (digitalRead(inSaturne)==HIGH)) {
+        while ((counter<D_COUNTER) && (digitalRead(inSaturne)==LOW)) {
             delay(1); // attente 1ms
             counter=counter+1;
         }
-        if (counter==30) { // leader mort
+        if (counter==D_COUNTER) { // leader mort
             digitalWrite(greenLEDSaturne, HIGH);
             digitalWrite(redLEDSaturne, LOW);
-            digitalWrite(outVenus,HIGH);
+            digitalWrite(outVenus,LOW);
+            digitalWrite(outSaturne,HIGH);
             idLeader=0;
         } else { // leader vivant
-            //digitalWrite(outVenus,LOW);
+            //digitalWrite(outVenus,HIGH);
             digitalWrite(greenLEDSaturne, LOW);
         }    
         break;
