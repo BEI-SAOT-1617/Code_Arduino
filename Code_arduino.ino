@@ -28,7 +28,7 @@ void setup() {
     pinMode(greenLEDSaturne, OUTPUT); // LED verte Saturne (2)
     pinMode(redLEDSaturne, OUTPUT); // LED rouge Saturne (2)
     
-    
+    // HIGH = niveau 0, LOW = niveau 1
     digitalWrite(outVenus,HIGH);
     digitalWrite(outSaturne,HIGH);
     digitalWrite(greenLEDVenus, HIGH);
@@ -48,11 +48,13 @@ void loop() {
             idLeader=1;
             digitalWrite(outSaturne,LOW);
             digitalWrite(greenLEDVenus, LOW);
+            digitalWrite(redLEDVenus, HIGH);
             
         } else if (digitalRead(inSaturne)==LOW) {
             idLeader=2;
             digitalWrite(outVenus,LOW);
             digitalWrite(greenLEDSaturne, LOW);
+            digitalWrite(redLEDSaturne, HIGH);
         }
     break; 
     case 1:
