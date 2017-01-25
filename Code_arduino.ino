@@ -3,7 +3,7 @@ Watchdog
 
 */
 
-#define D_COUNTER 50
+#define D_COUNTER 5000
 const int outVenus=2;
 const int outSaturne=3;
 const int inVenus=4;
