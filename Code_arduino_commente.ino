@@ -51,14 +51,14 @@ void loop() {
         if (digitalRead(inVenus)==HIGH) { // Venus changed its mode to Leader
             idLeader=1; // Leader = Venus
             digitalWrite(outSaturne,HIGH); // sending a signal to Saturne saying the leader is alive
-            digitalWrite(outVenus,LOW); // reseting the signal to Venus (unused when leader)
+            digitalWrite(outVenus,LOW); // resetting the signal to Venus (unused when leader)
             digitalWrite(greenLEDVenus, LOW);
             digitalWrite(redLEDVenus, HIGH);
             
         } else if (digitalRead(inSaturne)==HIGH) { // Saturne changed its mode to Leader
             idLeader=2; // Leader = Saturne
             digitalWrite(outVenus,HIGH); // sending a signal to Venus saying the leader is alive
-            digitalWrite(outSaturne,LOW); // reseting the signal to Saturne (unused when leader)
+            digitalWrite(outSaturne,LOW); // resetting the signal to Saturne (unused when leader)
             digitalWrite(greenLEDSaturne, LOW);
             digitalWrite(redLEDSaturne, HIGH);
         }
